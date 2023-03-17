@@ -3,18 +3,18 @@ package Model;
 public class ChatMessage
 {
   private String messageText;
-  private String senderName;
+  private String userName;
   private boolean isPrivate;
 
-  public ChatMessage(String messageText, String senderName) {
+  public ChatMessage(String messageText, String userName) {
       this.messageText = messageText;
-      this.senderName = senderName;
+      this.userName = userName;
       this.isPrivate = false;
   }
 
-  public ChatMessage(String messageText, String senderName, boolean isPrivate) {
+  public ChatMessage(String messageText, String userName, boolean isPrivate) {
       this.messageText = messageText;
-      this.senderName = senderName;
+      this.userName = userName;
       this.isPrivate = isPrivate;
   }
 
@@ -26,8 +26,8 @@ public class ChatMessage
       return messageText;
   }
 
-  public String getSenderName() {
-      return senderName;
+  public String getUserName() {
+      return userName;
   }
 
   public void setMessageText(String messageText) {
@@ -35,11 +35,11 @@ public class ChatMessage
   }
 
   public void setSenderName(String senderName) {
-      this.senderName = senderName;
+      this.userName = senderName;
   }
 
   @Override
   public String toString() {
-      return getSenderName() + ": " + getMessageText();
+      return getUserName() + ": " + getMessageText();
   }
 }
