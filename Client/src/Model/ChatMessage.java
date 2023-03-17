@@ -34,8 +34,8 @@ public class ChatMessage
       this.messageText = messageText;
   }
 
-  public void setSenderName(String senderName) {
-      this.userName = senderName;
+  public void setUserName(String userName) {
+      this.userName = userName;
   }
 
   @Override
