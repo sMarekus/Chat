@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ChatMediator implements UnnamedPropertyChangeSubject
+public class ChatMediatorClient implements UnnamedPropertyChangeSubject
 {
 
  private final String host;
@@ -25,7 +25,7 @@ public class ChatMediator implements UnnamedPropertyChangeSubject
  private  String userName;
  private  Gson gson;
 
-  public ChatMediator(Model model,String host, int port)
+  public ChatMediatorClient(Model model,String host, int port)
   {
     this.host = host;
     this.port = port;

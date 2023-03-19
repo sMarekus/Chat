@@ -2,7 +2,7 @@ package Model;
 
 import Validators.PasswordValidator;
 import Validators.UserNameValidator;
-import mediator.ChatMediator;
+import mediator.ChatMediatorClient;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -12,7 +12,7 @@ import java.util.List;
 public class ModelManager implements Model, PropertyChangeListener
 {
 
-private final ChatMediator chatMediatorClient;
+private final ChatMediatorClient chatMediatorClient;
 
 private final PropertyChangeSupport support;
 
@@ -20,7 +20,7 @@ public static ModelManager instance;
 
 private final List<User>userList;
 
-  public ModelManager( ChatMediator chatMediatorClient, PropertyChangeSupport support, List userList)
+  public ModelManager( ChatMediatorClient chatMediatorClient, PropertyChangeSupport support, List userList)
   {
     this.chatMediatorClient = chatMediatorClient;
     this.userList =  userList;

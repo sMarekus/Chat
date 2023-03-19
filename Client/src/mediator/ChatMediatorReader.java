@@ -9,10 +9,10 @@ import java.io.IOException;
 public class ChatMediatorReader implements Runnable
 {
   private BufferedReader input;
-  ChatMediator chatMediatorClient;
+  ChatMediatorClient chatMediatorClient;
   private Gson gson;
 
-  public ChatMediatorReader(ChatMediator chatMediatorClient,BufferedReader input)
+  public ChatMediatorReader(ChatMediatorClient chatMediatorClient,BufferedReader input)
   {
   this.chatMediatorClient=chatMediatorClient;
   this.input=input;
