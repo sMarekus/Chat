@@ -25,6 +25,8 @@ public class ChatMediatorClient implements UnnamedPropertyChangeSubject
  private  String userName;
  private  Gson gson;
 
+ private String password;
+
   public ChatMediatorClient(Model model,String host, int port)
   {
     this.host = host;
@@ -74,8 +76,13 @@ public class ChatMediatorClient implements UnnamedPropertyChangeSubject
     System.out.println(gsonMessage);
   }
 
-  public void setUserName(){
+  public void setUserName(String userName){
     this.userName=userName;
+  }
+
+  public void setPassword(String password)
+  {
+    this.password = password;
   }
 
   public String getUserName(){

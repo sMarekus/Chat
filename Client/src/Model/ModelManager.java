@@ -69,7 +69,8 @@ private final List<User>userList;
       return userList.get(userList.size() -1);
     }
 
-    public int getUserCount(){
+    public int getUserCount()
+    {
     return userList.size();
     }
 
@@ -78,22 +79,22 @@ private final List<User>userList;
 
   @Override public void sendMessage(String text)
   {
-    //chatMediatorClient.sendMessage(text);
+    chatMediatorClient.sendMessage(text);
   }
 
   @Override public void getNumberOfUsers()
   {
-
+    chatMediatorClient.getNumberOfUsers();
   }
 
   @Override public void setUserName(String userName)
   {
-
+    chatMediatorClient.setUserName(userName);
   }
 
   @Override public void setPassword(String password)
   {
-
+    chatMediatorClient.setPassword(password);
   }
 
   @Override public void addListener(PropertyChangeListener listener)
