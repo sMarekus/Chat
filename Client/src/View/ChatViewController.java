@@ -22,18 +22,20 @@ import javafx.scene.control.TextArea;
 
     @FXML
     void onSend(ActionEvent event) {
-
+      chatMessageViewModel.sendMessage();
     }
 
     @FXML
     void onShow(ActionEvent event) {
-
+      chatMessageViewModel.getNumberOfUsers();
     }
 
     @Override protected void init()
     {
       this.chatMessageViewModel=getViewModelFactory().getChatMessageViewModel();
-      messageField.textProperty().bind(chatMessageViewModel.chatMessageProperty());
+      chatField.textProperty().bind(chatMessageViewModel.chatMessageProperty());
+      messageField.textProperty().bindBidirectional(chatMessageViewModel.chatMessageProperty());
+
     }
   }
 
