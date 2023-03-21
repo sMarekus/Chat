@@ -1,5 +1,6 @@
 package Model;
 
+import Validators.UserNameValidator;
 import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 public interface Model extends UnnamedPropertyChangeSubject
 {
@@ -10,5 +11,6 @@ public interface Model extends UnnamedPropertyChangeSubject
 
   void setUserName(String userName);
 
+  void setUserName(String userName, UserNameValidator validator);
   void setPassword(String password);
 }

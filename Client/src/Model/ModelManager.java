@@ -21,12 +21,15 @@ public static ModelManager instance;
 
 private final List<User>userList;
 
-  public ModelManager( ChatMediatorClient chatMediatorClient, PropertyChangeSupport support, List userList)
+
+public ModelManager( ChatMediatorClient chatMediatorClient, PropertyChangeSupport support, List userList)
   {
     this.chatMediatorClient = chatMediatorClient;
     this.userList =  userList;
     this.support = new PropertyChangeSupport(this);
   }
+
+
 
 
 
@@ -50,7 +53,7 @@ private final List<User>userList;
     if (getUser(username) != null) {
       throw new IllegalStateException("User already exists.");
     }
-    User user = new User(username, password);
+    User user = new User(username);
     userList.add(user);
     support.firePropertyChange("userCount", userList.size() - 1, userList.size());
   }
@@ -93,9 +96,32 @@ private final List<User>userList;
   }
 
   @Override public void setUserName(String userName)
+
   {
-    chatMediatorClient.setUserName(userName);
+    UserNameValidator.validateUserName(userName);
+
+
+    if (getUser(userName) != null) {
+      throw new IllegalStateException("User already exists.");
+    }
+    User user = new User(userName);
+    userList.add(user);
+    support.firePropertyChange("userCount", userList.size() - 1, userList.size());
   }
+
+  @Override public void setUserName(String userName, UserNameValidator validator)
+  {
+    UserNameValidator.validateUserName(userName);
+
+
+    if (getUser(userName) != null) {
+      throw new IllegalStateException("User already exists.");
+    }
+    User user = new User(userName);
+    userList.add(user);
+    support.firePropertyChange("userCount", userList.size() - 1, userList.size());
+  }
+
 
   @Override public void setPassword(String password)
   {

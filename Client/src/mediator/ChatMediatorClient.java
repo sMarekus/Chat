@@ -2,6 +2,7 @@ package mediator;
 
 import Model.ChatMessage;
 import Model.Model;
+import Validators.UserNameValidator;
 import com.google.gson.Gson;
 import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 
@@ -88,7 +89,6 @@ public class ChatMediatorClient implements UnnamedPropertyChangeSubject
   public String getUserName(){
     return userName;
 }
-
 
 
 
