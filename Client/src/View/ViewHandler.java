@@ -4,8 +4,6 @@ import ViewModel.ViewModelFactory;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ViewModel.*;
-
-
 import javafx.scene.layout.Region;
 
 public class ViewHandler extends ViewCreator
@@ -19,13 +17,6 @@ public class ViewHandler extends ViewCreator
     this.viewModelFactory=viewModelFactory;
   }
 
-
-  @Override protected void initViewController(ViewController viewController,
-      Region root)
-  {
-    viewController.init(this,viewModelFactory,root);
-  }
-
   public void startStage(Stage primaryStage){
     this.primaryStage=primaryStage;
     this.currentScene=new Scene(new javafx.scene.layout.Region());
@@ -33,7 +24,7 @@ public class ViewHandler extends ViewCreator
   }
 
   public void openView(String id){
-    Region root=getViewController(id).getRoot();
+    Region root = getViewController(id).getRoot();
 
     currentScene.setRoot(root);
     String title="";
@@ -41,13 +32,16 @@ public class ViewHandler extends ViewCreator
     {
       title += root.getUserData();
     }
-
-
+    primaryStage.setTitle(title);
+    primaryStage.setScene(currentScene);
+    primaryStage.setHeight(root.getPrefHeight());
+    primaryStage.setWidth(root.getPrefWidth());
+    primaryStage.show();
   }
 
   @Override protected void initViewController(ViewController viewController,
-      javax.swing.plaf.synth.Region root)
+      Region root)
   {
-
+    viewController.init(this, viewModelFactory, root);
   }
 }

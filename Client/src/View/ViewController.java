@@ -2,7 +2,7 @@ package View;
 
 import ViewModel.ViewModelFactory;
 
-import javax.swing.plaf.synth.Region;
+import javafx.scene.layout.Region;
 
 public abstract class ViewController
 {

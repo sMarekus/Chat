@@ -1,6 +1,6 @@
 package View;
 
-import javax.swing.plaf.synth.Region;
+import javafx.scene.layout.Region;
 import java.util.HashMap;
 import java.util.Map;
 
