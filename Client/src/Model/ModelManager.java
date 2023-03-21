@@ -7,6 +7,7 @@ import mediator.ChatMediatorClient;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModelManager implements Model, PropertyChangeListener
@@ -29,9 +30,13 @@ private final List<User>userList;
 
 
 
-  public static synchronized ModelManager getInstance(){
-    if (instance==null){
-      instance=new ModelManager(getInstance().chatMediatorClient, new PropertyChangeSupport(new Object()),getInstance().userList);
+  public static synchronized ModelManager getInstance() {
+    if (instance == null) {
+      instance = new ModelManager(
+          new ChatMediatorClient(null,"localhost",2020),
+          new PropertyChangeSupport(new Object()),
+          new ArrayList<>()
+      );
     }
     return instance;
   }
