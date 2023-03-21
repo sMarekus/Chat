@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ChatMessageViewModel implements PropertyChangeListener
 {
   private Model model;
-  private StringProperty chatMessage;
+  private  StringProperty chatMessage;
   private ArrayList<String> chatSupport;
   private StringProperty input;
 
@@ -27,6 +27,10 @@ public class ChatMessageViewModel implements PropertyChangeListener
   public void sendMessage() {
     model.sendMessage(input.get());
     input.set("");
+  }
+
+  public StringProperty chatMessageProperty(){
+    return chatMessage;
   }
 
   public void getNumberOfUsers() {

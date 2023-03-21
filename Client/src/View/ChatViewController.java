@@ -1,11 +1,15 @@
 package View;
 
 
+import ViewModel.ChatMessageViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 
-  public class ChatViewController {
+  public class ChatViewController extends ViewController
+  {
+
+    private ChatMessageViewModel chatMessageViewModel;
 
     @FXML
     private TextArea chatField;
@@ -26,6 +30,11 @@ import javafx.scene.control.TextArea;
 
     }
 
+    @Override protected void init()
+    {
+      this.chatMessageViewModel=getViewModelFactory().getChatMessageViewModel();
+      messageField.textProperty().bind(chatMessageViewModel.chatMessageProperty());
+    }
   }
 
 
