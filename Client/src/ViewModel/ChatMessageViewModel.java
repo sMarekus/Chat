@@ -2,18 +2,23 @@ package ViewModel;
 
 import Model.Model;
 import javafx.application.Platform;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import Model.ChatMessage;
+import Model.User;
 
 public class ChatMessageViewModel implements PropertyChangeListener
 {
   private Model model;
   private  StringProperty chatMessage;
-  private ArrayList<String> chatSupport;
+  private ObservableList<ChatMessage> chatSupport= FXCollections.observableArrayList();
   private StringProperty input;
 
   public ChatMessageViewModel(Model model) {
@@ -21,23 +26,24 @@ public class ChatMessageViewModel implements PropertyChangeListener
     model.addListener(this);
     input = new SimpleStringProperty();
     chatMessage = new SimpleStringProperty();
-    chatSupport = new ArrayList<>();
   }
 
-  public void sendMessage() {
+  public void sendMessage(String message) {
+    chatSupport.add(new ChatMessage(message,model.getUserName()));
     model.sendMessage(input.get());
     input.set("");
   }
+
 
   public StringProperty chatMessageProperty(){
     return chatMessage;
   }
 
-  public void getNumberOfUsers() {
-    model.getNumberOfUsers();
-  }
+ public ObservableList<User>getAllUsers(){
+    return model.getAllUsers();
+ }
 
-  public ArrayList<String> getChatSupport()
+  public ObservableList<ChatMessage> getChatSupport()
   {
     return chatSupport;
   }
@@ -46,8 +52,10 @@ public class ChatMessageViewModel implements PropertyChangeListener
     return input;
   }
 
+
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
+    /*
     Platform.runLater(()->{
       String chatMessageTemp = evt.getOldValue().toString() + ": " + evt.getNewValue().toString();
       chatSupport.add(chatMessageTemp);
@@ -58,6 +66,7 @@ public class ChatMessageViewModel implements PropertyChangeListener
       }
 
       chatMessage.set(allMessage);
-    });
+    });*/
   }
 }
+

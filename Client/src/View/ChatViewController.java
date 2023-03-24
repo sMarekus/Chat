@@ -1,9 +1,12 @@
 package View;
 
 
+import Model.ChatMessage;
+import Model.User;
 import ViewModel.ChatMessageViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 
   public class ChatViewController extends ViewController
@@ -12,29 +15,29 @@ import javafx.scene.control.TextArea;
     private ChatMessageViewModel chatMessageViewModel;
 
     @FXML
-    private TextArea chatField;
+    private ListView<ChatMessage>chatListView;
+
+    @FXML
+    ListView<User>userListView;
+
 
     @FXML
     private TextArea messageField;
 
     @FXML
-    private TextArea userField;
-
-    @FXML
     void onSend(ActionEvent event) {
-      chatMessageViewModel.sendMessage();
-    }
-
-    @FXML
-    void onShow(ActionEvent event) {
-      chatMessageViewModel.getNumberOfUsers();
+      chatMessageViewModel.sendMessage(messageField.getText());
+      chatListView.setItems(chatMessageViewModel.getChatSupport());
+      messageField.clear();
     }
 
     @Override protected void init()
     {
       this.chatMessageViewModel=getViewModelFactory().getChatMessageViewModel();
-      chatField.textProperty().bind(chatMessageViewModel.chatMessageProperty());
-      messageField.textProperty().bindBidirectional(chatMessageViewModel.chatMessageProperty());
+      //chatField.textProperty().bind(chatMessageViewModel.chatMessageProperty());
+      chatListView.setItems(chatMessageViewModel.getChatSupport());
+      userListView.setItems(chatMessageViewModel.getAllUsers());
+      //messageField.textProperty().bindBidirectional(chatMessageViewModel.chatMessageProperty());
 
     }
   }

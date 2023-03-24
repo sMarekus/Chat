@@ -1,12 +1,16 @@
 package View;
 
 import ViewModel.ViewModelFactory;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ViewModel.*;
 import javafx.scene.layout.Region;
 
-public class ViewHandler extends ViewCreator
+import java.io.IOException;
+
+public class ViewHandler
 {
   private Stage primaryStage;
   private Scene currentScene;
@@ -19,29 +23,43 @@ public class ViewHandler extends ViewCreator
 
   public void startStage(Stage primaryStage){
     this.primaryStage=primaryStage;
-    this.currentScene=new Scene(new javafx.scene.layout.Region());
+    this.currentScene=new Scene(new Region());
     openView("LoginView.fxml");
   }
 
-  public void openView(String id){
-    Region root = getViewController(id).getRoot();
-
-    currentScene.setRoot(root);
-    String title="";
-    if (root.getUserData() !=null)
-    {
-      title += root.getUserData();
-    }
-    primaryStage.setTitle(title);
-    primaryStage.setScene(currentScene);
-    primaryStage.setHeight(root.getPrefHeight());
-    primaryStage.setWidth(root.getPrefWidth());
-    primaryStage.show();
-  }
-
-  @Override protected void initViewController(ViewController viewController,
-      Region root)
+  public void openView(String id)
   {
-    viewController.init(this, viewModelFactory, root);
+    try
+    {
+      Parent root = loadFromFxml(id);
+      currentScene.setRoot(root);
+      String title="";
+      if (root.getUserData() !=null)
+      {
+        title += root.getUserData();
+      }
+      primaryStage.setTitle(title);
+      primaryStage.setScene(currentScene);
+      primaryStage.show();
+    }catch (IOException e){
+      e.printStackTrace();
+    }
+
   }
+
+
+  private Parent loadFromFxml(String fxmlFile) throws IOException
+  {
+    ViewController viewController=null;
+    Parent root;
+      FXMLLoader loader= new FXMLLoader();
+      loader.setLocation(getClass().getResource(fxmlFile));
+      root=loader.load();
+      viewController=loader.getController();
+      viewController.init(this,viewModelFactory);
+
+    return root;
+  }
+
 }
+

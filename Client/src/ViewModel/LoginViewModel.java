@@ -21,6 +21,12 @@ public class LoginViewModel
     error.set("");
   }
 
+  public void addUser(String user){
+    model.addUser(user);
+  }
+
+
+
   public StringProperty getErrorProperty() {
     return error;
   }

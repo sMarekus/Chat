@@ -1,6 +1,8 @@
 package Model;
 
-public class ChatMessage
+import java.io.Serializable;
+
+public class ChatMessage implements Serializable
 {
   private String messageText;
   private String userName;

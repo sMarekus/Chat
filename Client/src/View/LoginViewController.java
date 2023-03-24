@@ -18,6 +18,7 @@ public class LoginViewController extends ViewController
 
   @FXML
   void onLogIn(ActionEvent event) {
+    loginViewModel.addUser(usernameField.getText());
     onEnter();
   }
 

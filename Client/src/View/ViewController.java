@@ -6,7 +6,6 @@ import javafx.scene.layout.Region;
 
 public abstract class ViewController
 {
-  private Region root;
 
   private ViewHandler viewHandler;
 
@@ -14,16 +13,12 @@ public abstract class ViewController
 
   protected abstract void init();
 
-  public void init(ViewHandler viewHandler,ViewModelFactory viewModelFactory,Region root){
-    this.root=root;
+  public void init(ViewHandler viewHandler,ViewModelFactory viewModelFactory){
     this.viewHandler=viewHandler;
     this.viewModelFactory=viewModelFactory;
     init();
   }
 
-  public Region getRoot(){
-    return root;
-  }
   public ViewModelFactory getViewModelFactory(){
     return viewModelFactory;
   }

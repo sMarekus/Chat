@@ -1,6 +1,9 @@
 package Model;
 
 import Validators.UserNameValidator;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import mediator.ChatMediatorClient;
 
 import java.beans.PropertyChangeEvent;
@@ -19,6 +22,8 @@ private final PropertyChangeSupport support;
 
 public static ModelManager instance;
 
+private ObservableList<User>userObservableList;
+
 
 
 public ModelManager() throws IOException
@@ -28,6 +33,7 @@ public ModelManager() throws IOException
     chatMediatorClient.connect();
     chatMediatorClient.addListener(this);
     this.support = new PropertyChangeSupport(this);
+    userObservableList= FXCollections.observableArrayList();
   }
 
   public static  ModelManager getInstance() throws IOException
@@ -58,7 +64,20 @@ public ModelManager() throws IOException
     chatMediatorClient.setUserName(userName);
   }
 
+  @Override public String getUserName()
+  {
+    return chatMediatorClient.getUserName();
+  }
 
+  @Override public void addUser(String user)
+  {
+    userObservableList.add(new User(user));
+  }
+
+  @Override public ObservableList<User> getAllUsers()
+  {
+    return userObservableList;
+  }
 
   @Override public void addListener(PropertyChangeListener listener)
   {
