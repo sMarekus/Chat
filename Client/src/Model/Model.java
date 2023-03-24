@@ -11,6 +11,4 @@ public interface Model extends UnnamedPropertyChangeSubject
 
   void setUserName(String userName);
 
-  void setUserName(String userName, UserNameValidator validator);
-  void setPassword(String password);
 }

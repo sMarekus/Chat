@@ -17,8 +17,8 @@ import java.net.Socket;
 public class ChatMediatorClient implements UnnamedPropertyChangeSubject
 {
 
- private final String host;
- private final int port;
+ private  String host;
+ private  int port;
  private  Socket socket;
  private  BufferedReader input;
  private  PrintWriter output;
@@ -28,7 +28,7 @@ public class ChatMediatorClient implements UnnamedPropertyChangeSubject
 
  private String password;
 
-  public ChatMediatorClient(Model model,String host, int port)
+  public ChatMediatorClient(Model model,String host, int port) throws IOException
   {
     this.host = host;
     this.port = port;
@@ -42,6 +42,9 @@ public class ChatMediatorClient implements UnnamedPropertyChangeSubject
   socket=new Socket(host,port);
   input=new BufferedReader(new InputStreamReader(socket.getInputStream()));
   output=new PrintWriter(socket.getOutputStream(),true);
+  ChatMediatorReader receiver=new ChatMediatorReader(this,input);
+  Thread receiverThread=new Thread(receiver);
+  receiverThread.start();
   }
 
   public void disconnect() throws IOException
@@ -66,7 +69,7 @@ public class ChatMediatorClient implements UnnamedPropertyChangeSubject
   }
 
   public void getNumberOfUsers(){
-    String numberOfUsers=gson.toJson(new ChatMessage("1",userName,true));
+    String numberOfUsers=gson.toJson(new ChatMessage("1",getUserName(),true));
     System.out.println(numberOfUsers);
   }
 
