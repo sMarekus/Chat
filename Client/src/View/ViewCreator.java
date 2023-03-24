@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Region;
-public  abstract class ViewCreator
+public abstract class ViewCreator
 {
   private Map<String,ViewController> views=new HashMap<>();
 
@@ -24,6 +24,7 @@ public  abstract class ViewCreator
       viewItem=loadFromFxml(id);
       views.put(id,viewItem);
     }
+
     return viewItem;
   }
 
@@ -37,7 +38,7 @@ public  abstract class ViewCreator
       viewController=loader.getController();
       initViewController(viewController,root);
     }
-    catch (IOException e)
+    catch (Exception e)
     {
       e.printStackTrace();
     }

@@ -7,7 +7,7 @@ public class ClientTest
 {
   public static void main(String[] args) throws IOException
   {
-    Model model=ModelManager.getInstance();
+    Model model= new ModelManager();
     model.getNumberOfUsers();
     model.sendMessage("funguje to? ");
   }

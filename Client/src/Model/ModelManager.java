@@ -1,12 +1,12 @@
 package Model;
 
-import Validators.PasswordValidator;
 import Validators.UserNameValidator;
 import mediator.ChatMediatorClient;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,33 +22,23 @@ public static ModelManager instance;
 private final List<User>userList;
 
 
-public ModelManager( ChatMediatorClient chatMediatorClient, PropertyChangeSupport support, List userList)
+public ModelManager() throws IOException
   {
-    this.chatMediatorClient = chatMediatorClient;
-    this.userList =  userList;
+
+    this.chatMediatorClient = new ChatMediatorClient(this,"localhost",2020);
+    chatMediatorClient.connect();
+    chatMediatorClient.addListener(this);
+    this.userList =  new ArrayList<>();
     this.support = new PropertyChangeSupport(this);
   }
 
 
 
 
-
-  public static synchronized ModelManager getInstance() {
-    if (instance == null) {
-      instance = new ModelManager(
-          new ChatMediatorClient(null,"localhost",2020),
-          new PropertyChangeSupport(new Object()),
-          new ArrayList<>()
-      );
-    }
-    return instance;
-  }
-
   public void addUser(String username, String password)
       throws IllegalAccessException
   {
     UserNameValidator.validateUserName(username);
-    PasswordValidator.validatePassword(password);
 
     if (getUser(username) != null) {
       throw new IllegalStateException("User already exists.");
